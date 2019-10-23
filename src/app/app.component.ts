@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   string;
+  string2;
   title = 'oshop';
 }
