@@ -10,6 +10,7 @@ import { User } from '../models/user'
 export class LoginComponent implements OnInit {
 
 user:User = null;
+resd: boolean = false;
 
   constructor(private loginService: LoginService) {  
    }
@@ -17,9 +18,13 @@ user:User = null;
   ngOnInit() {
   }
 
+
   public logIn() {
     this.loginService.setUser();
+
   }
+
+
 
   public logOut() {
     this.user = null;

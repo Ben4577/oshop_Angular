@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { getDefaultService } from 'selenium-webdriver/opera';
 import { User } from '../models/user'
-import { Observable, empty, of } from 'rxjs';
+import { Observable, empty, of, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -10,9 +10,9 @@ import { Observable, empty, of } from 'rxjs';
 export class LoginService {
 
 user: User;
+//public getLoggedInUser = new Subject<User>();
 
 constructor() {  
-
 }
 
 
@@ -22,6 +22,9 @@ public getUser(): Observable<User>
 }
 
 
+
+
+
 public setUser()
 {
   this.user = {
@@ -29,7 +32,7 @@ public setUser()
     password: "password"
 }
 
-console.log(this.user);
+//console.log(this.user);
 }
 
 

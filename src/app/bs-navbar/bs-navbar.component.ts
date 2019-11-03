@@ -10,20 +10,37 @@ import { LoginService } from '../services/login.service'
 })
 export class BsNavbarComponent {
 
-user: User = null;
+loginService: LoginService;
+user: User;
 
 constructor(loginService: LoginService) { 
-loginService.getUser().subscribe (result =>
-    {this.user = result}
-  );
 
-  console.log(this.user);
 
+  this.user = {
+    displayName: "ben kellington",
+    password: "password"
+  }
+
+//loginService.getUser().subscribe (result =>
+ // {this.user = result}
+  //);
+
+//loginService.getLoggedInUser.subscribe(result => 
+//  {this.user = result
+ //   console.log(this.user);
+ // });
+
+  //console.log(this.user);
 }
 
-logout() {
-  this.user = null;
-}
+
+
+
+//logout() {
+//  this.user = null;
+//}
+
+
 
 
 }
