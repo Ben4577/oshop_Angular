@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
-
+import { ProductService } from 'src/app/services/product.service';
+import { Product } from '../../models/Products'
 
 @Component({
   selector: 'app-product-form',
@@ -10,17 +11,31 @@ import { CategoryService } from 'src/app/services/category.service';
 export class ProductFormComponent implements OnInit {
 
 categories$;
+products = [];
 
 
-constructor(categoryService: CategoryService) {
+constructor(categoryService: CategoryService, private productService: ProductService) {
   this.categories$ = categoryService.getCategories();
-
-console.log(this.categories$);
  }
 
 
 
   ngOnInit() {
   }
+
+
+  save(product){
+  this.productService.create(product).subscribe(result =>
+  console.log("saved : " + result.id)
+  );
+  }
+
+  get()
+  {
+    this.productService.get().subscribe(result =>
+      console.log(result)
+      );
+  }
+
 
 }
