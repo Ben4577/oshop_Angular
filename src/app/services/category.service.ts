@@ -14,9 +14,9 @@ getCategories() {
   this.categoriesArray = [
     {name: "bread"},
     {name: "dairy"},
-    {name: "Fruits"},
-    {name: "Seasonings and Spices"},
-    {name: "Vegetables"}
+    {name: "fruits"},
+    {name: "seasonings"},
+    {name: "vegetables"}
   ]
 
   return this.categoriesArray;

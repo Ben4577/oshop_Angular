@@ -22,6 +22,8 @@ import { LoginService} from './services/login.service';
 import { CategoryService } from './services/category.service';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
+import {CustomFormsModule} from 'ng2-validation';
+
 
 
 @NgModule({
@@ -48,15 +50,19 @@ import { ProductService } from './services/product.service';
       {path: 'order-success', component: OrderSuccessComponent},
       {path: 'my/orders', component: MyOrdersComponent},
       {path: 'login', component: LoginComponent},
-
+    
       {path: 'admin/products', component: AdminProductsComponent},
       {path: 'admin/products/new', component: ProductFormComponent},
+      {path: 'admin/products/:id', component: ProductFormComponent},
+     
+
       {path: 'admin/orders', component: AdminOrdersComponent},
     ]),
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    CustomFormsModule,
     HttpClientModule,
   ],
   providers: [
