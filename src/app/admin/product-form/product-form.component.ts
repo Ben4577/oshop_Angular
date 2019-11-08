@@ -14,7 +14,7 @@ export class ProductFormComponent implements OnInit {
 
 categories$;
 products = [];
-product: Product;
+product = {};
 id;
 
 
@@ -29,15 +29,16 @@ constructor(
   this.id = this.route.snapshot.paramMap.get('id');
   if(this.id) {
     this.productService.get(this.id).subscribe(result =>
-      {
-      console.log( result);
-      this.product = <Product>result;
+      {     
+      this.product = result;
+      console.log(result);
       }
     )
   }
- }
+}
 
 
+ 
 
 save(product){
   if(this.id)
