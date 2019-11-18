@@ -23,6 +23,7 @@ import { CategoryService } from './services/category.service';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
 import {CustomFormsModule} from 'ng2-validation';
+import { ErrorpageComponent } from './errorpage/errorpage.component';
 
 
 
@@ -40,6 +41,7 @@ import {CustomFormsModule} from 'ng2-validation';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
+    ErrorpageComponent,
   ],
   imports: [
     RouterModule.forRoot([
@@ -50,13 +52,11 @@ import {CustomFormsModule} from 'ng2-validation';
       {path: 'order-success', component: OrderSuccessComponent},
       {path: 'my/orders', component: MyOrdersComponent},
       {path: 'login', component: LoginComponent},
-    
       {path: 'admin/products', component: AdminProductsComponent},
       {path: 'admin/products/new', component: ProductFormComponent},
       {path: 'admin/products/:id', component: ProductFormComponent},
-     
-
       {path: 'admin/orders', component: AdminOrdersComponent},
+      {path: 'errorpage', component: ErrorpageComponent},
     ]),
     BrowserModule,
     AppRoutingModule,

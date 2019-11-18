@@ -64,6 +64,28 @@ save(product){
 }
 
 
+delete() {
+  if(!confirm('Are you sure you want to delete this product?')) return;
+    this.productService.delete(this.id).subscribe(result =>
+      { 
+        alert("deleted");
+        if(result)
+        {
+    this.router.navigate(['/admin/products']);
+    console.log('item deleted');
+        }
+        else
+        {
+    this.router.navigate(['/errorpage'])
+        }
+      },
+      error =>  this.router.navigate(['/errorpage'])
+    );
+}
+
+
+
+
 ngOnInit() {
 }
 
