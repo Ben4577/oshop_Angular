@@ -2,54 +2,10 @@
 <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
 
-<!--<p>
-    <input 
-    #query
-    (keyup)="filter(query.value)"
-    type="text" class="form-control" placeholder="Search...">
-</p>
-
-
-<data-table
-[items]="items"
-[itemCount]="itemCount"
-(reload)="reloadItems($event)"
->
-
-<data-teble-column
-[property]="'title'"
-[header]="'Title'"
-[sortable]="true"
-[resizeable]="true"
->
-
-<data-teble-column
-[property]="'price'"
-[header]="'Price'"
-[sortable]="true"
-[resizeable]="true"
->
-<ng-template #dataTableCell let-item="item">
-    {{ item.price | currency: 'USD': true }}
-</ng-template>
-</data-teble-column>
-
-
-<data-teble-column
-[property]="'$key'"
-[sortable]="true"
->
-<ng-template #dataTableCell let-item="item">
-        <a [routerLink]="['/admin/products/', item.id]">Edit</a> 
-</ng-template>
-</data-teble-column>
-
-
-</data-table>-->
 
 
 
-<table class="table">
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
 <thead>
     <tr>
         <th>Title</th>

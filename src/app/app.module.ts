@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
 import {CustomFormsModule} from 'ng2-validation';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -62,6 +63,7 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
     FormsModule,
     CustomFormsModule,
     HttpClientModule,
+    DataTablesModule
   ],
   providers: [
     CategoryService,

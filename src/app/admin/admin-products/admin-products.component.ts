@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from '../../models/Products'
-import { Subscription } from 'rxjs';
-declare var $;
+import { Subscription, Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -18,41 +19,37 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 products: Product[];
 filteredProducts: Product[];
 subscription: Subscription;
-//tableRsource: DataTableResource<Product>;
 items: Product[] = [];
 itemCount: Number;
 
 
+//Datatables Properties
+dtOptions: DataTables.Settings = {};
+dtTrigger: Subject<any> = new Subject();
+@ViewChild(DataTableDirective, {static: true}) dtElement: DataTableDirective;
 
 
-  constructor(private productService: ProductService) { 
-    this.subscription = this.productService.getAll().subscribe(result =>
+constructor(private productService: ProductService) { }
+
+
+  ngOnInit() {
+    
+        //Datatable
+        this.dtOptions = {
+        pagingType: 'full_numbers',
+        pageLength: 5,
+        autoWidth: true,
+        order: [[0, 'desc']]
+      };
+
+      this.subscription = this.productService.getAll().subscribe(result =>
       {        
       this.filteredProducts = this.products = result;
-     // this.intializeTable(result);
+       this. dtTrigger.next();
       });
-    }
 
+  }
 
- // private intializeTable(products: Product[]){
-   // this.tableRsource = new DataTableResource(this.products);
-  //  this.tableRsource.query({ offset: 0})
-  //  .then(items => this.items = items);
-   // this.tableRsource.count()
-   // .then(count => this.itemCount = count);
-   // }
-
-
-   // reloadItems(params) {
-   //   if(!this.tableRsource) return;
-   //   this.tableRsource.query(params)
-    //  .then(items => this.items = items);
-   // }
-
-  //filter(query: string) {
-  //console.log(query);
-  //this.filteredProducts = (query) ? this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : this.products;
- //}
 
 
   ngOnDestroy() {
@@ -60,9 +57,7 @@ itemCount: Number;
   }
 
 
-  ngOnInit() {
-    //this.dataTable = $(this.table.nativeElement);
-    //this.dataTable.data;
-  }
+
+ 
 
 }
