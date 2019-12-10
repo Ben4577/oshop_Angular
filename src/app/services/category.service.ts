@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-categoriesArray: any;
+baseUrl:string = 'https://localhost:44377/api/oshop/';
 
-constructor() { }
+constructor(private http: HttpClient) { }
 
-
-getCategories() {
-  this.categoriesArray = [
-    {name: "bread"},
-    {name: "dairy"},
-    {name: "fruits"},
-    {name: "seasonings"},
-    {name: "vegetables"}
-  ]
-
-  return this.categoriesArray;
+getAll(): Observable<Category[]> {
+  return this.http.get<Category[]>(this.baseUrl + 'getcategories');
+ }
+ 
 }
 
-
+interface Category {
+  name: string;
 }

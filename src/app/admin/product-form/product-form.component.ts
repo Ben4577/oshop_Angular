@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
 
-categories$;
+categories$ = [];
 products = [];
 product = {};
 id;
@@ -24,7 +24,13 @@ constructor(
   categoryService: CategoryService,
   private productService: ProductService) {
 
-  this.categories$ = categoryService.getCategories();
+
+categoryService.getAll().subscribe(result =>
+  {
+    this.categories$ = result;
+  });
+
+
 
   this.id = this.route.snapshot.paramMap.get('id');
   if(this.id) {
@@ -82,8 +88,6 @@ delete() {
       error =>  this.router.navigate(['/errorpage'])
     );
 }
-
-
 
 
 ngOnInit() {

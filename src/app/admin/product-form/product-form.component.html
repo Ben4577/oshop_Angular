@@ -56,21 +56,21 @@
                                         <button class="btn btn-primary">Save</button>
                                         <button type ="button" (click) = "delete()" class="ml-3 btn btn-danger">Delete</button>
                                             
-        </form>
+                                        </form>
                                         
-        </div>
+                                        </div>
 
 
                                         <div class="col-md-6">
-                                                        <div class="card" style="width: 20rem;">
+                                                <div *ngIf="product.title" class="card" style="width: 20rem;">
                                                         <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl">
                                                         <div class="card-body">
                                                         <h5 class="card-title">{{ product.title }}</h5>
                                                         <p class="card-text">{{ product.price | currency: 'USD': true}}</p>
                                                         </div>
-                                                        </div>
+                                                 </div>
                                         </div>
-</div>
+                                </div>
 
 
 
