@@ -31,7 +31,6 @@ categoryService.getAll().subscribe(result =>
   });
 
 
-
   this.id = this.route.snapshot.paramMap.get('id');
   if(this.id) {
     this.productService.get(this.id).subscribe(result =>
@@ -44,7 +43,6 @@ categoryService.getAll().subscribe(result =>
 }
 
 
- 
 
 save(product){
   if(this.id)

@@ -23,6 +23,8 @@ import { ProductService } from './services/product.service';
 import {CustomFormsModule} from 'ng2-validation';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { DataTablesModule } from 'angular-datatables';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 
 
@@ -41,6 +43,8 @@ import { DataTablesModule } from 'angular-datatables';
     LoginComponent,
     ProductFormComponent,
     ErrorpageComponent,
+    ProductFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     RouterModule.forRoot([
