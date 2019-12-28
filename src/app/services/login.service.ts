@@ -22,9 +22,6 @@ public getUser(): Observable<User>
 }
 
 
-
-
-
 public setUser()
 {
   this.user = {

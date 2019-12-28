@@ -20,16 +20,13 @@ httpOptions = {
 
 constructor(private http: HttpClient) { }
 
-
 getAll(): Observable<Product[]> {
   return this.http.get<Product[]>(this.baseUrl + 'getproducts');
  }
  
-
  get(productId){
    return this.http.get<Product>(this.baseUrl + 'getproduct/' + productId);
  }
-
 
 create(product): Observable<Product> {
   console.log(product);
@@ -37,7 +34,6 @@ create(product): Observable<Product> {
   const url = this.baseUrl + 'createproduct/';
   return this.http.post(url, product) as Observable<Product>; 
 }
-
 
 update(product): Observable<Product> {
   console.log(product);
