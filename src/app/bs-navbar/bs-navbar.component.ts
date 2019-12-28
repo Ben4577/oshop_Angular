@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../models/user'
 import { LoginService } from '../services/login.service'
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ConsoleReporter } from 'jasmine';
+import { ShoppingCart } from '../models/ShoppingCart';
 
 
 @Component({
@@ -10,30 +11,30 @@ import { ConsoleReporter } from 'jasmine';
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent implements OnInit{
+export class BsNavbarComponent implements OnInit, OnDestroy{
 
 loginService: LoginService;
 user: User;
 shoppingCartItemCount: Number = 0;
+cart: ShoppingCart;
 
 
 ngOnInit() {
 
-  let cart$ =  this.shoppingCart.getTotalCartQuantity();
-
-  cart$.subscribe ( result =>
-    {
-    this.shoppingCartItemCount = 0;
-    this.shoppingCartItemCount = result.totalQuantity;
-    }
-   ); 
+   this.shoppingCartService.getTotalCartQuantity.subscribe (
+  result =>  this.shoppingCartItemCount = result
+  ) 
 
 };
 
 
+ngOnDestroy(){
+  this.shoppingCartService.getTotalCartQuantity.unsubscribe();
+}
+
 
 constructor(loginService: LoginService, 
-  private shoppingCart :  ShoppingCartService) { 
+  private shoppingCartService :  ShoppingCartService) { 
 
   
 
