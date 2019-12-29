@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, of } from 'rxjs';
 import { ShoppingCart } from '../models/ShoppingCart';
 import { Product } from '../models/Products';
-import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class ShoppingCartService {
 
 shoppingCart: ShoppingCart;
-
+totalPrice: number = 0;
 
   constructor(private http: HttpClient) { 
   }
@@ -39,6 +38,7 @@ getCartItems() : Observable<ShoppingCart> {
 
 
 getTotalCartQuantity : Subject<number> = new Subject();
+getTotalCartAmount : Subject<number> = new Subject();
 
 
 getProductFromCart(productId) {
@@ -68,14 +68,30 @@ addProductToCart(product: Product){
   this.shoppingCart.products.push(product);
   }
   else{
-    console.log('p id: ' + product.id);
       productFound.quantity += 1;
   }
 
 this.shoppingCart.totalQuantity += 1;
 this.getTotalCartQuantity.next(this.shoppingCart.totalQuantity);
+this.totalPrice = this.getCartValue();
 
 console.log(this.shoppingCart);
+}
+
+
+getCartValue() 
+{
+    this.totalPrice = 0;
+
+    if(this.shoppingCart)
+    {
+    for(let product of this.shoppingCart.products)
+    {
+      this.totalPrice += product.quantity * product.price;
+    }
+    this.getTotalCartAmount.next(this.totalPrice);
+  }
+    return this.totalPrice;
 }
 
 
@@ -94,7 +110,7 @@ removeProductFromCart(productId) {
 
   this.shoppingCart.totalQuantity -= 1;
   this.getTotalCartQuantity.next(this.shoppingCart.totalQuantity); 
-
+  this.totalPrice =this.getCartValue();
   }
 
   console.log(this.shoppingCart);
@@ -102,9 +118,10 @@ removeProductFromCart(productId) {
 }
 
 
-removeAllProductsFromCart() {
+clearCart() {
   this.shoppingCart.products = [];
   this.shoppingCart.totalQuantity = 0;
+  this.getTotalCartQuantity.next(this.shoppingCart.totalQuantity); 
 }
 
 

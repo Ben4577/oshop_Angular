@@ -15,31 +15,36 @@ totalPrice: number = 0;
 
 constructor(private shoppingCartService : ShoppingCartService) { }
 
+
 ngOnInit() {
 
- this.shoppingCartService.getCartItems().subscribe (
+this.totalPrice = this.shoppingCartService.getCartValue();
+
+ this.shoppingCartService.getTotalCartAmount.subscribe (
+   result =>  {
+     this.totalPrice = result;
+   }
+  ) 
+
+  this.shoppingCartService.getCartItems().subscribe (
   result => 
   { 
     if(result)
     {
-      this.shoppingCart = result;
-
-      for(let product of this.shoppingCart.products)
-      {
-        this.totalPrice += product.quantity * product.price;
-      }
-
+      this.shoppingCart = result;      
     }
     else
     {
       this.shoppingCart.totalQuantity = 0;
-    }
-   
+    } 
   }
-) 
+)  
 
+}
 
-  
+clearCart() {
+  this.shoppingCartService.clearCart();
+  this.totalPrice = this.shoppingCartService.getCartValue();
 }
 
 }

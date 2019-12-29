@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../models/user'
 import { LoginService } from '../services/login.service'
 import { ShoppingCartService } from '../services/shopping-cart.service';
-import { ConsoleReporter } from 'jasmine';
 import { ShoppingCart } from '../models/ShoppingCart';
 
 
@@ -42,8 +41,6 @@ constructor(loginService: LoginService,
     displayName: "ben kellington",
     password: "password"
   }
-
-
 
 
 //loginService.getUser().subscribe (result =>

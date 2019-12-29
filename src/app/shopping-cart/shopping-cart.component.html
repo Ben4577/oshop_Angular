@@ -1,5 +1,5 @@
 <h1>Shopping Cart</h1>
-<ng-container>
+<div class="row col-10">
     <p>
         You have {{ shoppingCart.totalQuantity }} items in your shopping cart.
     </p>
@@ -7,26 +7,40 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th class="text-center" style="width: 230px">Quantity</th>
+            <th class="text-right" style="width: 200px">Price</th>
         </tr>
     </thead>
 <tbody>
     <tr *ngFor="let product of shoppingCart.products">
+        <td>
+            <div [style.backgroundImage]="'url(' + product.imageUrl + ')'" class="thumbnail" ></div>
+        </td>
         <td>{{product.title}}</td>
-        <td>{{product.quantity}}</td>
-        <td>{{product.quantity * product.price | currency: USD: true}}</td>
+        <td>
+            <product-quantity [product]="product">
+            </product-quantity>
+        </td>
+        <td class="text-right">
+            {{product.quantity * product.price | currency: 'USD'}}
+        </td>
     </tr>
 </tbody>
 <tfoot>
     <tr>
         <td></td>
         <td></td>
-        <td>{{totalPrice | currency: USD: true}}</td>
+        <td></td>
+        <td class="text-right">
+            {{totalPrice | currency: 'USD'}}
+        </td>
     </tr>
 </tfoot>
 </table>
 
-
-</ng-container>
+<button 
+(click) = "clearCart()"
+class="btn btn-danger btn-sm">Clear Shopping Cart</button>
+</div>
