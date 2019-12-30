@@ -21,30 +21,30 @@ httpOptions = {
 constructor(private http: HttpClient) { }
 
 getAll(): Observable<Product[]> {
-  return this.http.get<Product[]>(this.baseUrl + 'getproducts');
+  return this.http.get<Product[]>(this.baseUrl + 'getProducts');
  }
  
  get(productId){
-   return this.http.get<Product>(this.baseUrl + 'getproduct/' + productId);
+   return this.http.get<Product>(this.baseUrl + 'getProduct/' + productId);
  }
 
 create(product): Observable<Product> {
   console.log(product);
 
-  const url = this.baseUrl + 'createproduct/';
+  const url = this.baseUrl + 'createProduct/';
   return this.http.post(url, product) as Observable<Product>; 
 }
 
 update(product): Observable<Product> {
   console.log(product);
 
-  const url = this.baseUrl + 'updateproduct/';
+  const url = this.baseUrl + 'updateProduct/';
   return this.http.put(url, product) as Observable<Product>; 
 }
 
 
 delete(productId): Observable<boolean> {
-  const url = this.baseUrl + 'deleteproduct/';
+  const url = this.baseUrl + 'deleteProduct/';
   return this.http.delete(url + productId) as Observable<boolean>;
 }
 

@@ -12,7 +12,7 @@ baseUrl:string = 'https://localhost:44377/api/oshop/';
 constructor(private http: HttpClient) { }
 
 getAll(): Observable<Category[]> {
-  return this.http.get<Category[]>(this.baseUrl + 'getcategories');
+  return this.http.get<Category[]>(this.baseUrl + 'getCategories');
  }
  
 }
