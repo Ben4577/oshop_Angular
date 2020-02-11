@@ -3,6 +3,7 @@ import { User } from '../models/user'
 import { LoginService } from '../services/login.service'
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ShoppingCart } from '../models/ShoppingCart';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ loginService: LoginService;
 user: User;
 shoppingCartItemCount: Number = 0;
 cart: ShoppingCart;
+showUserLoggedIn : string = "";
+
 
 
 ngOnInit() {
@@ -24,23 +27,27 @@ ngOnInit() {
   result =>  this.shoppingCartItemCount = result
   ) 
 
-};
+ // this.loginService.getUserLoginStatus.subscribe (
+ // result => this.showUserLoggedIn = result
+//)
 
+//this.loginService.getUserLoginStatus.next("");
+
+};
 
 ngOnDestroy(){
   this.shoppingCartService.getTotalCartQuantity.unsubscribe();
 }
 
-
 constructor(loginService: LoginService, 
   private shoppingCartService :  ShoppingCartService) { 
 
   
-
-  this.user = {
-    displayName: "ben kellington",
-    password: "password"
-  }
+this.user = null;
+   //{}
+   // displayName: "ben kellington",
+   // password: "password"
+  //}
 
 
 //loginService.getUser().subscribe (result =>

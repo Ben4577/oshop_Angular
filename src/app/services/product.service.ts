@@ -9,6 +9,7 @@ import { Product } from '../models/Products'
 })
 export class ProductService {
 
+
 baseUrl:string = 'https://localhost:44377/api/oshop/';
 body;
 

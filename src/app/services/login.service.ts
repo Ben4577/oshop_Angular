@@ -1,7 +1,9 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { getDefaultService } from 'selenium-webdriver/opera';
 import { User } from '../models/user'
-import { Observable, empty, of, Subject } from 'rxjs';
+import { Observable, empty, of, BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { LoginModel } from '../models/LoginModel';
 
 
 @Injectable({
@@ -10,28 +12,29 @@ import { Observable, empty, of, Subject } from 'rxjs';
 export class LoginService {
 
 user: User;
-//public getLoggedInUser = new Subject<User>();
+baseUrl:string = 'https://localhost:44377/api/account/';
 
-constructor() {  
+getUserLoginStatus: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
+constructor(private http: HttpClient) {  
+ 
 }
 
-
-public getUser(): Observable<User> 
+public getUser()
 {
-  return of (this.user);
 }
 
-
-public setUser()
+public setUser(loginModel: LoginModel) : Observable<string> 
 {
-  this.user = {
-    displayName: "ben kellington",
-    password: "password"
+  var result =  this.http.post(this.baseUrl + 'login', loginModel);
+return result as Observable<string>
 }
 
-//console.log(this.user);
 }
 
 
 
-}
+
+
+
+
