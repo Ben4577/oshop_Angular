@@ -32,10 +32,15 @@ showUserLoggedIn : string = "";
 
   public save(loginUser) {  
     this.loginService.setUser(loginUser).subscribe (
-      result => this.loginService.getUserLoginStatus.next(result)
+      result => 
+      {  
+      console.log(result.fullName);   
+      this.loginService.getUserLoginStatus.next(result.fullName);  
+      this.loginErrorMessage = "";
+      }
       ,
-      () => {this.loginErrorMessage = "Error: Unable to Log you in.";
-      this.showUserLoggedIn = "";
+    () => {this.loginErrorMessage = "Error: Unable to Log you in.";
+     this.showUserLoggedIn = "";
     }
     );
   }

@@ -4,6 +4,7 @@ import { User } from '../models/user'
 import { Observable, empty, of, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LoginModel } from '../models/LoginModel';
+import { ReturnUser } from '../models/ReturnUser';
 
 
 @Injectable({
@@ -14,21 +15,23 @@ export class LoginService {
 user: User;
 baseUrl:string = 'https://localhost:44377/api/account/';
 
-getUserLoginStatus: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+getUserLoginStatus: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
-constructor(private http: HttpClient) {  
- 
-}
+constructor(private http: HttpClient) {}
 
-public getUser()
+
+public setUser(loginModel: LoginModel) : Observable<ReturnUser> 
 {
+var result =  this.http.post(this.baseUrl + 'login', loginModel);
+return result as Observable<ReturnUser>
 }
 
-public setUser(loginModel: LoginModel) : Observable<string> 
+
+public logOut() : Observable<boolean>
 {
-  var result =  this.http.post(this.baseUrl + 'login', loginModel);
-return result as Observable<string>
+return this.http.get(this.baseUrl + 'logout',{}) as Observable<boolean>;
 }
+
 
 }
 

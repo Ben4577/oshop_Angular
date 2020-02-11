@@ -13,63 +13,46 @@ import { Subject } from 'rxjs';
 })
 export class BsNavbarComponent implements OnInit, OnDestroy{
 
-loginService: LoginService;
 user: User;
 shoppingCartItemCount: Number = 0;
 cart: ShoppingCart;
 showUserLoggedIn : string = "";
 
 
-
 ngOnInit() {
-
-   this.shoppingCartService.getTotalCartQuantity.subscribe (
+  this.shoppingCartService.getTotalCartQuantity.subscribe (
   result =>  this.shoppingCartItemCount = result
   ) 
 
- // this.loginService.getUserLoginStatus.subscribe (
- // result => this.showUserLoggedIn = result
-//)
-
-//this.loginService.getUserLoginStatus.next("");
+  this.loginService.getUserLoginStatus.subscribe (
+  result => this.showUserLoggedIn = result
+)
 
 };
 
-ngOnDestroy(){
-  this.shoppingCartService.getTotalCartQuantity.unsubscribe();
-}
-
-constructor(loginService: LoginService, 
+constructor(
+  private loginService: LoginService, 
   private shoppingCartService :  ShoppingCartService) { 
 
-  
 this.user = null;
-   //{}
-   // displayName: "ben kellington",
-   // password: "password"
-  //}
-
-
-//loginService.getUser().subscribe (result =>
- // {this.user = result}
-  //);
-
-//loginService.getLoggedInUser.subscribe(result => 
-//  {this.user = result
- //   console.log(this.user);
- // });
-
-  //console.log(this.user);
 }
 
 
+logOut() {
+  this.loginService.logOut().subscribe(
+result => {
+  if(result)
+  {
+    this.loginService.getUserLoginStatus.next("");
+  }
+});
+}
 
 
-//logout() {
-//  this.user = null;
-//}
-
-
+ngOnDestroy(){
+  this.shoppingCartService.getTotalCartQuantity.unsubscribe();
+  this.loginService.getUserLoginStatus.unsubscribe();
+}
 
 
 }
