@@ -53,10 +53,10 @@
                                         <button type ="button" (click) = "delete()" class="ml-3 btn btn-danger">Delete</button>
                                             
                                         </form>
-                                        
+                                        <br/>
+                                        <p style="color: red;">{{adminUpdateError}}</p>                                       
                                         </div>
-
-
+                              
                                         <div class="col-md-6">
                                                 <product-card [product]="product" [show-actions]="false"></product-card>
                                         </div>

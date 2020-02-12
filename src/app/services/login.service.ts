@@ -19,19 +19,18 @@ getUserLoginStatus: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
 constructor(private http: HttpClient) {}
 
-
 public setUser(loginModel: LoginModel) : Observable<ReturnUser> 
 {
 var result =  this.http.post(this.baseUrl + 'login', loginModel);
 return result as Observable<ReturnUser>
 }
 
-
 public logOut() : Observable<boolean>
 {
+  let emptyString: string = ""
+  window.sessionStorage.setItem('token', emptyString);
 return this.http.get(this.baseUrl + 'logout',{}) as Observable<boolean>;
 }
-
 
 }
 

@@ -3,6 +3,7 @@ import { LoginService } from '../services/login.service'
 import { User } from '../models/user'
 import { LoginModel } from '../models/LoginModel';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -18,7 +19,9 @@ loginErrorMessage: string;
 showUserLoggedIn : string = "";
 
 
-  constructor(private loginService: LoginService) {  
+  constructor(private loginService: LoginService,
+    private router: Router
+    ) {  
     this.loginUser = new LoginModel();
     this.loginErrorMessage = "";
    }
@@ -34,9 +37,10 @@ showUserLoggedIn : string = "";
     this.loginService.setUser(loginUser).subscribe (
       result => 
       {  
-      console.log(result.fullName);   
+      window.sessionStorage.setItem('token', JSON.stringify(result.token));
       this.loginService.getUserLoginStatus.next(result.fullName);  
       this.loginErrorMessage = "";
+      this.router.navigate(['']);
       }
       ,
     () => {this.loginErrorMessage = "Error: Unable to Log you in.";
@@ -45,11 +49,17 @@ showUserLoggedIn : string = "";
     );
   }
 
-
   public logOut() {
-    this.user = null;
+    this.loginService.logOut().subscribe(
+      result => {
+        if(result)
+        {
+          this.loginService.getUserLoginStatus.next("");
+        }
+      });
   }
 
+  
 }
 
 

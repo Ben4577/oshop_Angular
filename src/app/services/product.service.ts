@@ -21,6 +21,7 @@ httpOptions = {
 
 constructor(private http: HttpClient) { }
 
+
 getAll(): Observable<Product[]> {
   return this.http.get<Product[]>(this.baseUrl + 'getProducts');
  }
@@ -30,25 +31,31 @@ getAll(): Observable<Product[]> {
  }
 
 create(product): Observable<Product> {
-  console.log(product);
+
+  let token = window.sessionStorage.getItem('token');
+  var headers = new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(token));
 
   const url = this.baseUrl + 'createProduct/';
-  return this.http.post(url, product) as Observable<Product>; 
+  return this.http.post(url, product, {headers}) as Observable<Product>; 
 }
 
-update(product): Observable<Product> {
-  console.log(product);
+update(product: Product): Observable<Product> {
+
+  let token = window.sessionStorage.getItem('token');
+  var headers = new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(token));
 
   const url = this.baseUrl + 'updateProduct/';
-  return this.http.put(url, product) as Observable<Product>; 
+  return this.http.put(url, product, {headers}) as Observable<Product>; 
 }
-
 
 delete(productId): Observable<boolean> {
-  const url = this.baseUrl + 'deleteProduct/';
-  return this.http.delete(url + productId) as Observable<boolean>;
-}
 
+  let token = window.sessionStorage.getItem('token');
+  var headers = new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(token));
+
+  const url = this.baseUrl + 'deleteProduct/';
+  return this.http.delete(url + productId, {headers}) as Observable<boolean>;
+}
 
 
 }

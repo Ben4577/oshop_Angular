@@ -3,6 +3,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ShoppingCart } from '../models/ShoppingCart';
 import { Subscription } from 'rxjs';
 import { OrderService } from '../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out',
@@ -14,13 +15,16 @@ export class CheckOutComponent implements OnInit, OnDestroy{
 shipping: number;
 shoppingCart : ShoppingCart = null;
 subscription: Subscription;
+sub: Subscription;
 user: User;
 orderSaved;
+showResult : string = "";
 
 
 constructor(
   private shoppingCartService: ShoppingCartService,
-  private orderService: OrderService
+  private orderService: OrderService,
+  private router: Router
   ) { 
     this.user = new User();
   }
@@ -32,9 +36,6 @@ constructor(
     ) 
   }
 
-ngOnDestroy() {
-  this.subscription.unsubscribe();
-}
 
   placeOrder(user) {
     let order = {
@@ -58,11 +59,20 @@ ngOnDestroy() {
       })
     };
 
-    this.orderService.storeOrder(order).subscribe(
-      result => this.orderSaved = result
+    this.sub = this.orderService.storeOrder(order).subscribe(
+      result =>
+      {this.orderSaved = result;
+      this.showResult = "Order Created";
+      },
+      error => this.showResult = "There has been an error saving the Order"
     );
-
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    this.sub.unsubscribe();
+  }
+  
 }
 
 

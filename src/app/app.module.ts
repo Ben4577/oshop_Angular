@@ -28,6 +28,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { OrderService } from './services/order.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -59,7 +60,10 @@ import { OrderService } from './services/order.service';
       {path: 'order-success', component: OrderSuccessComponent},
       {path: 'my/orders', component: MyOrdersComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/products', component: AdminProductsComponent},
+      {
+        path: 'admin/products', 
+        component: AdminProductsComponent,
+      },
       {path: 'admin/products/new', component: ProductFormComponent},
       {path: 'admin/products/:id', component: ProductFormComponent},
       {path: 'admin/orders', component: AdminOrdersComponent},
