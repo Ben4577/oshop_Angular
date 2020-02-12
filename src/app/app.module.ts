@@ -53,21 +53,58 @@ import { AuthGuard } from './guards/auth.guard';
   ],
   imports: [
     RouterModule.forRoot([
-      {path: '', component: ProductsComponent},
-      {path: 'products', component: ProductsComponent},
-      {path: 'shopping-cart', component: ShoppingCartComponent},
-      {path: 'check-out', component: CheckOutComponent},
-      {path: 'order-success', component: OrderSuccessComponent},
-      {path: 'my/orders', component: MyOrdersComponent},
-      {path: 'login', component: LoginComponent},
-      {
-        path: 'admin/products', 
-        component: AdminProductsComponent,
-      },
-      {path: 'admin/products/new', component: ProductFormComponent},
-      {path: 'admin/products/:id', component: ProductFormComponent},
-      {path: 'admin/orders', component: AdminOrdersComponent},
-      {path: 'errorpage', component: ErrorpageComponent},
+    {
+      path: '', 
+      component: ProductsComponent
+    },
+    {
+      path: 'products', 
+      component: ProductsComponent
+    },
+    {
+      path: 'shopping-cart', 
+      component: ShoppingCartComponent
+    },
+    {
+      path: 'check-out',
+      component: CheckOutComponent,
+      canActivate : [AuthGuard]
+    },
+    {
+      path: 'order-success', 
+      component: OrderSuccessComponent,
+      canActivate : [AuthGuard]
+    },   
+    {
+      path: 'my/orders', 
+      component: MyOrdersComponent,
+      canActivate : [AuthGuard]
+    },
+    {
+      path: 'login', 
+      component: LoginComponent},
+    {
+      path: 'admin/products', 
+      component: AdminProductsComponent,
+    },
+    {
+      path: 'admin/products/new',
+      component: ProductFormComponent,
+      canActivate : [AuthGuard]
+    },
+    {
+      path: 'admin/products/:id', 
+      component: ProductFormComponent,
+      canActivate : [AuthGuard]
+    },
+      {path: 'admin/orders', 
+      component: AdminOrdersComponent,
+      canActivate : [AuthGuard]
+    },
+    {
+      path: 'errorpage', 
+      component: ErrorpageComponent
+    },
     ]),
     BrowserModule,
     AppRoutingModule,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   string;
   string2;
   title = 'oshop';
@@ -14,6 +14,11 @@ export class AppComponent {
 
 constructor(private router: Router) {
   this.router.navigate(['']);
+}
+
+ngOnInit() {
+let emptyString: string = ""
+window.sessionStorage.setItem('token', emptyString);
 }
 
 }

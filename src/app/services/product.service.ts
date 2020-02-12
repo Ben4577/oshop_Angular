@@ -19,7 +19,8 @@ httpOptions = {
   })
 }
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) {
+ }
 
 
 getAll(): Observable<Product[]> {
