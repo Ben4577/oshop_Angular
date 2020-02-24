@@ -4,6 +4,8 @@ import { User } from '../models/user'
 import { LoginModel } from '../models/LoginModel';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { ConfirmUpdateModalComponent } from '../confirm-update-modal/confirm-update-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'login',
@@ -19,7 +21,9 @@ loginErrorMessage: string;
 showUserLoggedIn : string = "";
 
 
-  constructor(private loginService: LoginService,
+confirmUpdateModal: ConfirmUpdateModalComponent;
+
+  constructor(private loginService: LoginService, private modalService: NgbModal,
     private router: Router
     ) {  
     this.loginUser = new LoginModel();
@@ -58,6 +62,17 @@ showUserLoggedIn : string = "";
         }
       });
   }
+
+
+
+  openConfirmUpdateModal() {
+    this.modalService.open(ConfirmUpdateModalComponent);
+    //.result.then((result) => {
+    //    this.closeResult = `Closed with: ${result}`;
+    //}, (reason) => {
+    //    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    //});
+}
 
   
 }

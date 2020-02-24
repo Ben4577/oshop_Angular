@@ -29,6 +29,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { OrderService } from './services/order.service';
 import { AuthGuard } from './guards/auth.guard';
+import { ConfirmUpdateModalComponent } from './confirm-update-modal/confirm-update-modal.component';
 
 
 
@@ -50,6 +51,7 @@ import { AuthGuard } from './guards/auth.guard';
     ProductFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
+    ConfirmUpdateModalComponent,
   ],
   imports: [
     RouterModule.forRoot([
@@ -113,6 +115,9 @@ import { AuthGuard } from './guards/auth.guard';
     CustomFormsModule,
     HttpClientModule,
     DataTablesModule
+  ],
+  entryComponents: [
+    ConfirmUpdateModalComponent
   ],
   providers: [
     CategoryService,
